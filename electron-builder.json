@@ -1,0 +1,16 @@
+{
+  "appId": "com.example.app",
+  "files": ["src/", "dist-react/", "src/electron/main.js", "package.json"],
+  "extraResources": ["src/preload.cjs"],
+  "icon": "./try.png",
+  "mac": {
+    "target": "dmg"
+  },
+  "win": {
+    "target": ["portable", "msi"]
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  }
+}
