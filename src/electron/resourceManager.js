@@ -4,15 +4,16 @@ import os from "os";
 
 const POLING_INTERVAL = 500;
 
-export function pollResources() {
+export function pollResources(mainWindow) {
   setInterval(async () => {
     const cpuUsage = await getCPUUsage();
     const ramUsage = getRAMUsage();
     const storageData = getStorageData();
-    console.log("CPU using:", cpuUsage);
-    console.log("RAM using:", ramUsage);
-    console.log("Storage total:", storageData?.total);
-    console.log("Storage used:", storageData?.used);
+    mainWindow.webContents.send("statistics", {
+      cpuUsage,
+      ramUsage,
+      storageData,
+    });
   }, POLING_INTERVAL);
 }
 

@@ -1,18 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import BaseChart from "./Components/BaseChart";
+import { useStatistics } from "./CustomHooks/useStatistics";
+import Chart from "./Components/Chart";
 
 function App() {
   const [count, setCount] = useState(0);
-  // window.electron.getStaticData();
+  const statistics = useStatistics(20);
+  const cpuUsage = useMemo(
+    () => statistics.map((stat) => stat.cpuUsage),
+    [statistics]
+  );
   // useEffect(() => {
-  //   window.electron.getStaticData();
+  //   const unsub = window.electron.suscribeStatistics((data) =>
+  //     console.log(data)
+  //   );
+  //   return unsub;
   // }, []);
-
-  window.electron.getStaticData();
 
   return (
     <>
+      <div style={{ height: 120 }}>
+        {/* <BaseChart
+          stat={[{ value: 25 }, { value: 30 }, { value: 100 }]}
+        ></BaseChart> */}
+        <Chart cpu={cpuUsage} maxDataPoints={20} />
+      </div>
       <div>
         <h1>Desktop App</h1>
       </div>

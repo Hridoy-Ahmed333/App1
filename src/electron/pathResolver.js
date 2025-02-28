@@ -10,3 +10,11 @@ export function getPreLoadPath() {
     "src/electron/preload.cjs"
   );
 }
+
+export function getUIpath() {
+  return path.join(app.getAppPath(), "/dist-react/index.html");
+}
+
+export function getAssetsPath() {
+  return path.join(app.getAppPath(), "src/ui/assets");
+}
