@@ -8,11 +8,11 @@ export function pollResources(mainWindow) {
   setInterval(async () => {
     const cpuUsage = await getCPUUsage();
     const ramUsage = getRAMUsage();
-    const storageData = getStorageData();
+    const storageUsage = getStorageData().used;
     mainWindow.webContents.send("statistics", {
       cpuUsage,
       ramUsage,
-      storageData,
+      storageUsage,
     });
   }, POLING_INTERVAL);
 }
